@@ -13,5 +13,5 @@ This repository provides a shader to dissolve objects by distance from a world p
 
 1. _Dissolve Center_ is a Worldspace Position from where the dissolve effects originates
 2. _Dissolve Distance_ length (world units) of the dissolve starting from the center 
-2. _Dissolve Interpolation_ if and how far the interpolation should take place. If zero, there dissolve effect has no interpolation. 
+3. _Dissolve Interpolation_ if and how far the interpolation should take place. If zero, there dissolve effect has no interpolation. 
 3. _Dissolve Texture_ Texture used for interpolation
