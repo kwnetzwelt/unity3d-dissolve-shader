@@ -1,2 +1,7 @@
 Library/
 DissolveByDistance.sln
+Temp/
+DissolveByDistance.CSharp.Editor.Plugins.csproj
+DissolveByDistance.CSharp.Editor.csproj
+DissolveByDistance.CSharp.Plugins.csproj
+DissolveByDistance.CSharp.csproj
