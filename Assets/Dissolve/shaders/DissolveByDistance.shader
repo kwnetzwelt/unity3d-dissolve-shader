@@ -82,6 +82,7 @@ Shader "Custom/Dissolve/Distance/Opaque" {
 
 		half _Distance;
 		half _Interpolation;
+		half _BumpScale;
 
 
 		sampler2D _DissTexture;
@@ -98,14 +99,14 @@ Shader "Custom/Dissolve/Distance/Opaque" {
 
 
 			fixed4 c = tex2D(_MetallicGlossMap, IN.uv_MainTex);
-			o.Metallic = c.rgb * _Metallic ;
+			o.Metallic = c.r * _Metallic ;
 			o.Smoothness = _Glossiness * c.a;
 
 
 			c = tex2D(_MainTex, IN.uv_MainTex);
-			o.Albedo = c.rgb * _Color;
+			o.Albedo = c.rgb * _Color.rgb;
 
-			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap));
+			o.Normal = normalize(UnpackScaleNormal (tex2D (_BumpMap, IN.uv_BumpMap) , _BumpScale));
 
 			o.Emission = tex2D(_EmissionMap, IN.uv_MainTex) * _EmissionColor + saturate(1-(_Distance-l+0.5)) *_DissolveColor.rgb * tex2D(_DissTexture, IN.uv_DissTexture);
 			

@@ -134,6 +134,7 @@
 
 	half _Distance;
 	half _Interpolation;
+	half _BumpScale;
 
 	sampler2D _DissTexture;
 	float4 _Center;
@@ -155,7 +156,7 @@
 		c = tex2D(_MainTex, IN.uv_MainTex);
 		o.Albedo = c.rgb * _Color;
 
-		o.Normal = UnpackNormal(tex2D(_BumpMap, IN.uv_BumpMap));
+		o.Normal = normalize(UnpackScaleNormal (tex2D (_BumpMap, IN.uv_BumpMap) , _BumpScale));
 
 		o.Emission = tex2D(_EmissionMap, IN.uv_MainTex) * _EmissionColor + saturate(1 - (_Distance - l + 0.5)) *_DissolveColor.rgb * tex2D(_DissTexture, IN.uv_DissTexture);
 
