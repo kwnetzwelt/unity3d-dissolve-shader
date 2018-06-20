@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Hidden/DepthOfField/DepthOfField"
 {
     Properties
@@ -79,7 +81,7 @@ Shader "Hidden/DepthOfField/DepthOfField"
         v2fDepth vert(appdata_img v)
         {
             v2fDepth o;
-            o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+            o.pos = UnityObjectToClipPos(v.vertex);
             o.uv = v.texcoord.xy;
 
         #if UNITY_UV_STARTS_AT_TOP
@@ -93,7 +95,7 @@ Shader "Hidden/DepthOfField/DepthOfField"
         v2fDepth vertNoFlip(appdata_img v)
         {
             v2fDepth o;
-            o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+            o.pos = UnityObjectToClipPos(v.vertex);
             o.uv = v.texcoord.xy;
             return o;
         }
@@ -101,7 +103,7 @@ Shader "Hidden/DepthOfField/DepthOfField"
         v2f vert_d(appdata_img v)
         {
             v2f o;
-            o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
+            o.pos = UnityObjectToClipPos (v.vertex);
             o.uv1.xy = v.texcoord.xy;
             o.uv.xy = v.texcoord.xy;
 
@@ -116,7 +118,7 @@ Shader "Hidden/DepthOfField/DepthOfField"
         v2f vertFlip(appdata_img v)
         {
             v2f o;
-            o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
+            o.pos = UnityObjectToClipPos (v.vertex);
             o.uv1.xy = v.texcoord.xy;
             o.uv.xy = v.texcoord.xy;
 
@@ -134,7 +136,7 @@ Shader "Hidden/DepthOfField/DepthOfField"
         v2fBlur vertBlurPlusMinus(appdata_img v)
         {
             v2fBlur o;
-            o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+            o.pos = UnityObjectToClipPos(v.vertex);
             o.uv.xy = v.texcoord.xy;
             o.uv01 =  v.texcoord.xyxy + _Offsets.xyxy * float4(1,1, -1,-1) * _MainTex_TexelSize.xyxy / 6.0;
             o.uv23 =  v.texcoord.xyxy + _Offsets.xyxy * float4(2,2, -2,-2) * _MainTex_TexelSize.xyxy / 6.0;
